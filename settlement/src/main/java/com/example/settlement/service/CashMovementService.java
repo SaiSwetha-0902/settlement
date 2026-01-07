@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.settlement.model.CashAccount;
-import com.example.settlement.model.NettedOutput;
+import com.example.settlement.model.FundingHouseNettingResult;
 import com.example.settlement.model.SettlementInstruction;
 import com.example.settlement.repository.CashAccountRepository;
 
@@ -38,7 +38,7 @@ public class CashMovementService {
 
         BigDecimal amt = instruction.getAmount();
 
-        if (instruction.getType() ==  NettedOutput.Type.PAY_IN) {
+        if (instruction.getType() ==  FundingHouseNettingResult.Type.PAY_IN) {
             participant.debit(amt);
             nse.credit(amt);
         } else {

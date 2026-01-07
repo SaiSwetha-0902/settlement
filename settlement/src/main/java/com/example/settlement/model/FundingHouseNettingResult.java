@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "netted_output")
-public class NettedOutput implements SettlementInstruction {
+@Table(name = "funding_house_netting_result")
+public class FundingHouseNettingResult implements SettlementInstruction {
 
     @Id
     private Long id;

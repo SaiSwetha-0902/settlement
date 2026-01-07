@@ -29,9 +29,9 @@ public class SettlementBatchScheduler {
         this.distributorExecutor = distributorExecutor;
     }
 
-    @Scheduled(fixedDelay = 10000) // poll every 1s
+    @Scheduled(fixedDelay = 10000) 
     public void runFundHouseSettlement() {
-        for (int i = 0; i < 5; i++) { // submit up to 5 tasks
+        for (int i = 0; i < 5; i++) { 
             fundHouseExecutor.submit(() -> fundHouseWorker.process("BROKER_NODE_1"));
         }
     }

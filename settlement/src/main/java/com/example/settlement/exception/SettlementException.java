@@ -1,14 +1,24 @@
 package com.example.settlement.exception;
 
+import lombok.Getter;
 
-
+@Getter
 public class SettlementException extends RuntimeException {
 
-    public SettlementException(String message) {
-        super(message);
+    private final SettlementErrorCode errorCode;
+
+    public SettlementException(SettlementErrorCode errorCode) {
+        super(errorCode.getDefaultDescription());
+        this.errorCode = errorCode;
     }
 
-    public SettlementException(String message, Throwable cause) {
-        super(message, cause);
+    public SettlementException(SettlementErrorCode errorCode, Throwable cause) {
+        super(errorCode.getDefaultDescription(), cause);
+        this.errorCode = errorCode;
+    }
+
+    public SettlementException(SettlementErrorCode errorCode, String message) {
+        super(message != null ? message : errorCode.getDefaultDescription());
+        this.errorCode = errorCode;
     }
 }

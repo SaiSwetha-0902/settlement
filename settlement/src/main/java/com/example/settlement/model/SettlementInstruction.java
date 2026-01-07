@@ -7,7 +7,7 @@ public interface SettlementInstruction {
 
     Long getId();
 
-    NettedOutput.Type getType();
+    FundingHouseNettingResult.Type getType();
 
     BigDecimal getAmount();
 
@@ -17,10 +17,10 @@ public interface SettlementInstruction {
     Long getParticipantId();
     ParticipantType getParticipantType();
 
-    NettedOutput.Status getStatus();
+    FundingHouseNettingResult.Status getStatus();
 
     // Required for generic settlement worker
-    void setStatus(NettedOutput.Status status);
+    void setStatus(FundingHouseNettingResult.Status status);
     void setBrokerNodeId(String brokerNodeId);
     void setLeaseId(String leaseId);
     void setLeaseExpiry(LocalDateTime leaseExpiry);

@@ -2,16 +2,16 @@ package com.example.settlement.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.settlement.model.NettedOutput;
-import com.example.settlement.repository.NettedOutputRepository;
+import com.example.settlement.model.FundingHouseNettingResult;
+import com.example.settlement.repository.FundingHouseNettingResultRepository;
 import com.example.settlement.utils.LeaseUtil;
 
 @Service
 public class FundHouseSettlementWorkerService
-        extends AbstractSettlementWorkerService<NettedOutput> {
+        extends AbstractSettlementWorkerService<FundingHouseNettingResult> {
 
     public FundHouseSettlementWorkerService(
-    		NettedOutputRepository repo,
+    		FundingHouseNettingResultRepository repo,
             CashMovementService cashService,
             ReceiptLedgerService receiptService,
             LeaseUtil leaseUtil

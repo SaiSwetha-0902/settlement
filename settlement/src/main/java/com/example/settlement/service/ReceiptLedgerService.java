@@ -2,7 +2,7 @@ package com.example.settlement.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.settlement.model.NettedOutput;
+import com.example.settlement.model.FundingHouseNettingResult;
 import com.example.settlement.model.SettlementInstruction;
 import com.example.settlement.model.SettlementLedger;
 import com.example.settlement.model.SettlementReceipt;
@@ -46,7 +46,7 @@ public class ReceiptLedgerService {
         }
 
         // Parent = who initiated cash flow
-        if (instruction.getType() == NettedOutput.Type.PAY_IN) {
+        if (instruction.getType() == FundingHouseNettingResult.Type.PAY_IN) {
             receipt.setParentId(
                 instruction.getParticipantType() == SettlementInstruction.ParticipantType.FUND_HOUSE
                     ? SettlementReceipt.Parent.FUND_HOUSE
@@ -63,7 +63,7 @@ public class ReceiptLedgerService {
         ledger.setReceiptId(receipt.getReceiptId());
         ledger.setAmount(instruction.getAmount());
 
-        if (instruction.getType() == NettedOutput.Type.PAY_IN) {
+        if (instruction.getType() == FundingHouseNettingResult.Type.PAY_IN) {
             ledger.setDebitAccount(instruction.getParticipantId());
             ledger.setCreditAccount(instruction.getNseceId());
         } else {
