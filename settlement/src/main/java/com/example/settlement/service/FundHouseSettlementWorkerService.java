@@ -16,6 +16,6 @@ public class FundHouseSettlementWorkerService
             ReceiptLedgerService receiptService,
             LeaseUtil leaseUtil
     ) {
-        super(repo, cashService, receiptService, leaseUtil);
+        super(repo, repo, cashService, receiptService, leaseUtil);
     }
 }

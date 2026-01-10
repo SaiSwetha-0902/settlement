@@ -16,7 +16,7 @@ public interface DistributorNettedResultRepository
     @Transactional
     @Query(value = """
         SELECT * FROM distributor_netted_result
-        WHERE status = 'CALCULATED'
+        WHERE status = 'NETTED'
         AND (lease_expiry IS NULL OR lease_expiry < NOW())
         ORDER BY id
         LIMIT 1

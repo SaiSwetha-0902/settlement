@@ -1,0 +1,39 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: auth
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth_db
+    username: postgres
+    password: Swetha@09
+    
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+jwt:
+  secret: my-super-secret-key-which-is-long
+  expiration: 900000   # 15 minutes
+
+eureka:
+  instance:
+    prefer-ip-address: true   
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

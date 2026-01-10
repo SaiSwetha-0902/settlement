@@ -11,10 +11,6 @@ public interface SettlementInstructionRepository<T extends SettlementInstruction
 
     T findNextForSettlement();
 
-    Optional<T> findById(Long id);
-
-    T save(T instruction);
-
 	List<T> findByStatusAndLeaseExpiryBefore(Status initiated, LocalDateTime now);
 
 	

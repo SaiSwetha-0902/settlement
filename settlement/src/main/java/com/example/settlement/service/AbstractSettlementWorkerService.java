@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.settlement.exception.SettlementErrorCode;
 import com.example.settlement.service.ExceptionOutboxService;
@@ -17,20 +18,24 @@ import com.example.settlement.utils.LeaseUtil;
 
 public abstract class AbstractSettlementWorkerService<T extends SettlementInstruction> {
 
-    protected final SettlementInstructionRepository<T> repo;
+    protected final JpaRepository<T, Long> repo;
+    protected final SettlementInstructionRepository<T> settlementRepo;
     protected final CashMovementService cashService;
     protected final ReceiptLedgerService receiptService;
     protected final LeaseUtil leaseUtil;
 
     @Autowired
     protected ExceptionOutboxService exceptionOutboxService;
+    
     protected AbstractSettlementWorkerService(
-            SettlementInstructionRepository<T> repo,
+            JpaRepository<T, Long> repo,
+            SettlementInstructionRepository<T> settlementRepo,
             CashMovementService cashService,
             ReceiptLedgerService receiptService,
             LeaseUtil leaseUtil
     ) {
         this.repo = repo;
+        this.settlementRepo = settlementRepo;
         this.cashService = cashService;
         this.receiptService = receiptService;
         this.leaseUtil = leaseUtil;
@@ -73,7 +78,7 @@ public abstract class AbstractSettlementWorkerService<T extends SettlementInstru
     @Transactional
     protected T claimForSettlement(String brokerNodeId) {
 
-        T instruction = repo.findNextForSettlement();
+        T instruction = settlementRepo.findNextForSettlement();
         if (instruction == null) return null;
         if (instruction.getStatus() == FundingHouseNettingResult.Status.SETTLED ||
             instruction.getStatus() == FundingHouseNettingResult.Status.FAILED) {

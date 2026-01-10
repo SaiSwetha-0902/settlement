@@ -16,7 +16,7 @@ public interface FundingHouseNettingResultRepository
     @Transactional
     @Query(value = """
         SELECT * FROM funding_house_netting_result
-        WHERE status = 'CALCULATED'
+        WHERE status = 'NETTED'
         AND (lease_expiry IS NULL OR lease_expiry < NOW())
         ORDER BY settlement_date
         LIMIT 1
